@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BookDTO>
+
+@{
+	ViewData["Title"] = "BookIndex";
+}
+<h1>BookIndex</h1>
+<p>
+	<a asp-action="BookCreate" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create New</a>
+</p>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Id)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsAvailable)
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model.Any())
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td> @Html.DisplayFor(modelItem => item.Id) </td>
+					<td> @Html.DisplayFor(modelItem => item.Title) </td>
+					<td> @Html.DisplayFor(modelItem => item.IsAvailable) </td>
+					<td> <a asp-action="Details" class="btn btn-success" asp-route-ID="@item.Id">Details <i class="fa fa-edit"></i></a> </td>
+					<td> <a asp-action="BookUpdate" class="btn btn-warning" asp-route-ID="@item.Id">Update <i class="fa fa-edit"></i></a> </td>
+					<td> <a asp-action="BookDelete" class="btn btn-danger" asp-route-ID="@item.Id">Delete <i class="fa-solid fa-trash-can"></i></a> </td>
+				</tr>
+			}
+		} else {
+			<p>No data available.</p>
+		}
+	</tbody>
+</table>
